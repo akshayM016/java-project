@@ -1,0 +1,139 @@
+
+import java.util.Scanner;
+
+
+public class parkingdemo 
+{
+
+    int a[] = new int[10];
+    int i, charge, h,count=0;
+
+    parkingdemo() 
+    {
+        for (i = 0; i < 10; i++) 
+        {
+            a[i] = 0;
+        }
+    }
+
+    int parkin() 
+    {
+        Scanner k = new Scanner(System.in);
+        if(count==10)
+        {
+             System.out.println("No  locations AValiable");
+             return 0;
+        }
+       
+        System.out.println("avaliable locations");
+        for(i=0;i<10;i++)
+        {
+            if(a[i]==0)
+                System.out.print((i+1)+"\t");
+        }
+
+        int j = k.nextInt();
+            try
+            {
+        if (a[j - 1] == 0) 
+        {
+
+            System.out.println("location avaliable to park ");
+            System.out.println("car parked at location =" + j);
+            
+            a[j - 1] = 1;
+            count++;
+            return a[j - 1];
+
+        }
+            }
+            catch(ArrayIndexOutOfBoundsException e)
+            {
+                System.out.println("please enter valid location");
+           }
+        System.out.println("location not avaliable  ");
+        System.out.println("enter another location ");
+        return 0;
+
+    }
+
+    int parkout()
+    {
+        Scanner k = new Scanner(System.in);
+       
+        if(count==0)
+        {
+            System.out.println("No CAR PARKED");
+             return 0;
+        }
+        System.out.println("parked locations");
+        System.out.println("enter the location you chose");
+        for(i=0;i<10;i++)
+        {
+            if(a[i]==1)
+                System.out.print((i+1)+"\t");
+        }
+        int j = k.nextInt();
+        try {
+        if (a[j - 1] == 1) {
+
+            System.out.println(" ---car found--- ");
+            System.out.println("car parked at location =" + j);
+            System.out.println("parking charge 50 per hours ");
+
+            System.out.println("enter no of hours parked ");
+            h = k.nextInt();
+            charge = h * 100;
+
+            System.out.println("parking charge =" + charge);
+            System.out.println(" ---car removed--- ");
+            a[j - 1] = 0;
+            count--;
+            return a[j - 1];
+
+        }}catch(ArrayIndexOutOfBoundsException e)
+            {
+                System.out.println("please enter valid location");
+            }
+        System.out.println(" ---car not present at entered location --- ");
+        return 0;
+
+    }
+
+}
+
+class demo 
+{
+
+    public static void main(String args[]) {
+        parkingdemo p = new parkingdemo();
+        System.out.println(" ----PARKING LOT---- ");
+        System.out.println("*******WELCOME********");
+
+        int ch;
+        Scanner k = new Scanner(System.in);
+
+        while (1 != 0) {
+            System.out.println("MENU \n1.park car  \n2.remove  car \n3.exit ");
+            System.out.println("enter choice");
+            ch = k.nextInt();
+
+            switch (ch) 
+            {
+                case 1:
+                    p.parkin();
+                    break;
+
+                case 2:
+                    p.parkout();
+                    break;
+
+                case 3:
+                    System.exit(0);
+
+                default:
+                    System.out.println("enter correct choice");
+            }
+        }
+    }
+}
